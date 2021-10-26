@@ -3,7 +3,10 @@ const { Client, Collection, Intents } = require("discord.js");
 const dotenv = require("dotenv");
 dotenv.config()
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const myIntents = new Intents();
+myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES);
+
+const client = new Client({ intents: myIntents });
 
 client.commands = new Collection();
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
@@ -30,6 +33,16 @@ client.on("interactionCreate", async interaction => {
 	} catch (error) {
 		console.error(error);
 		return interaction.reply({ content: "There was an error executing this command!", ephemeral: true });
+	}
+});
+
+client.on("messageCreate", async message => {
+	if (message.channel.id == process.env.RATING_CHANNEL_ID) {
+		await message.react("1️⃣");
+		await message.react("2️⃣");
+		await message.react("3️⃣");
+		await message.react("4️⃣");
+		await message.react("5️⃣");
 	}
 });
 
