@@ -29,20 +29,20 @@ module.exports = {
                 .setColor("#9C59B6")
                 .setTitle("Server info")
                 .setDescription(`
-                Server name: ${interaction.guild.name}
-                Server ID: ${interaction.guild.id}
-                Server icon: ${interaction.guild.iconURL() || "None"}
-                Server banner: ${interaction.guild.bannerURL() || "None"}
-                Total channels: ${interaction.guild.channels.fetch().then(channels => {return channels.size}).catch(console.error)}
-                Total members: ${interaction.guild.memberCount} members
-                Server preview enabled: ${interaction.guild.features.includes("PREVIEW_ENABLED") ? `Yes` : `No`}
-                Community enabled: ${interaction.guild.features.includes("COMMUNITY") ? `Yes` : `No`}
-                Member screening enabled: ${interaction.guild.features.includes("MEMBER_VERIFICATION_GATE_ENABLED") ? `Yes` : `No`}
-                Welcome screen enabled: ${interaction.guild.features.includes("WELCOME_SCREEN_ENABLED") ? `Yes` : `No`}
+Server name: ${interaction.guild.name}
+Server ID: ${interaction.guild.id}
+Server icon: ${interaction.guild.iconURL() || "None"}
+Server banner: ${interaction.guild.bannerURL() || "None"}
+Total channels: ${interaction.guild.channels.fetch().then(channels => { return channels.size }).catch(console.error)}
+Total members: ${interaction.guild.memberCount} members
+Server preview enabled: ${interaction.guild.features.includes("PREVIEW_ENABLED") ? `Yes` : `No`}
+Community enabled: ${interaction.guild.features.includes("COMMUNITY") ? `Yes` : `No`}
+Member screening enabled: ${interaction.guild.features.includes("MEMBER_VERIFICATION_GATE_ENABLED") ? `Yes` : `No`}
+Welcome screen enabled: ${interaction.guild.features.includes("WELCOME_SCREEN_ENABLED") ? `Yes` : `No`}
                 `)
                 .setFooter("Please note that some things may not be up to date immediately.")
                 .setTimestamp()
-                .setAuthor(interaction.user.tag, interaction.user.avatarURL({ "StaticImageURLOptions": {"format":"png"} }))
+                .setAuthor(interaction.user.tag, interaction.user.avatarURL({ "StaticImageURLOptions": { "format": "png" } }))
 
             interaction.reply({ embeds: [embed] });
         }
