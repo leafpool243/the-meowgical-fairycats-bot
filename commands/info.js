@@ -33,7 +33,7 @@ Server name: ${interaction.guild.name}
 Server ID: ${interaction.guild.id}
 Server icon: ${interaction.guild.iconURL() || "None"}
 Server banner: ${interaction.guild.bannerURL() || "None"}
-Total channels: ${interaction.guild.channels.fetch().then(channels => { return channels.size }).catch(console.error)}
+Total channels & categories: ${await interaction.guild.channels.fetch().then(channels => { return channels.size })}
 Total members: ${interaction.guild.memberCount} members
 Server preview enabled: ${interaction.guild.features.includes("PREVIEW_ENABLED") ? `Yes` : `No`}
 Community enabled: ${interaction.guild.features.includes("COMMUNITY") ? `Yes` : `No`}
