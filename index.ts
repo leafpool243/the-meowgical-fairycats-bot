@@ -1,9 +1,7 @@
-export {};
-
-const fs = require("fs");
+const _fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
-const dotenv = require("dotenv");
-dotenv.config()
+const _dotenv = require("dotenv");
+_dotenv.config()
 
 const myIntents = new Intents();
 myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES);
@@ -11,9 +9,9 @@ myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES);
 const client = new Client({ intents: myIntents });
 
 client.commands = new Collection();
-const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".ts"));
+const _commandFiles = _fs.readdirSync("./commands").filter(file => file.endsWith(".ts"));
 
-for (const file of commandFiles) {
+for (const file of _commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.data.name, command);
 }
