@@ -9,7 +9,7 @@ myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES);
 const client = new Client({ intents: myIntents });
 
 client.commands = new Collection();
-const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
+const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".ts"));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
