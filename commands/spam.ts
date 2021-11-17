@@ -6,13 +6,13 @@ module.exports = {
         .setName("spam")
         .setDescription("SPAM >:3"),
     async execute(interaction) {
-        if (!tester.execute(interaction)) return;
+        if (!permissioncheck.execute(interaction)) return;
 
         await interaction.reply({
             content: "Starting chaos now.",
             ephemeral: true
         });
 
-        interaction.channel.send("meow")
+        interaction.channel.send("meow");
     },
 };
