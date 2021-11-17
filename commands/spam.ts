@@ -13,6 +13,8 @@ module.exports = {
             ephemeral: true
         });
 
-        interaction.channel.send("meow");
+        for(let i = 0; i < 5; i++) {
+            interaction.channel.send("meow");
+        }
     },
 };
