@@ -24,5 +24,10 @@ module.exports = {
         for(let i = 0; i < interaction.options.getInteger("num_of_times"); i++) {
             interaction.channel.send(interaction.options.getString("message"));
         }
+
+        interaction.followUp({
+            content: "Spam completed.",
+            ephermeral: true
+        })
     },
 };
