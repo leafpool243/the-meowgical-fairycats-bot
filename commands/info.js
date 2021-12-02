@@ -1,7 +1,12 @@
 const { MessageEmbed } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+<<<<<<< HEAD
 const tester = require("../testersonly.js");
 const strings = require("../strings.json");
+=======
+const tester = require("../testersonly.js")
+const strings = require("../strings.json")
+>>>>>>> 5598c0b (more ts -> js)
 
 const data = new SlashCommandBuilder()
     .setName("info")
