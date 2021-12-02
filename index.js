@@ -2,6 +2,8 @@ const _fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
 const _dotenv = require("dotenv");
 _dotenv.config()
+const sqlite = require("sqlite3").verbose();
+let db = new sqlite.Database("database.db", sqlite.OPEN_READWRITE | sqlite.OPEN_CREATE);
 
 const myIntents = new Intents();
 myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES);
@@ -17,12 +19,26 @@ for (const file of _commandFiles) {
 }
 
 client.once("ready", () => {
+    db.run("CREATE TABLE IF NOT EXISTS users(userid INTEGER NOT NULL, test STRING)");
 	console.log(`Logged in as ${client.user.username}`);
     client.user.setActivity("with your existence. . . .", { type: "PLAYING"})
 });
 
 client.on("interactionCreate", async interaction => {
 	if (!interaction.isCommand()) return;
+
+	db.get("SELECT * FROM users WHERE userid = ?", [interaction.user.id], (err, row) => {
+		if (err) {
+			console.log(err);
+			return;
+		}
+		if (row === undefined) {
+			let insert = db.prepare("INSERT INTO users VALUES(?,?)");
+			insert.run(interaction.user.id, null);
+			insert.finalize();
+			return;
+		}
+	});
 
 	const command = client.commands.get(interaction.commandName);
 
