@@ -1,7 +1,7 @@
 const _fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
-const _dotenv = require("dotenv");
-_dotenv.config()
+const dotenv = require("dotenv");
+dotenv.config()
 
 const myIntents = new Intents();
 myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES);
