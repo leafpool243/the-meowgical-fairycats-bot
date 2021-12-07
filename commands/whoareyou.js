@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 
 const data = new SlashCommandBuilder()
     .setName("whoareyou")
-    .setDescription("Did I forget to introduce myself?")
+    .setDescription("Did I forget to introduce myself?");
 
 async function whoareyou(interaction) {
     await interaction.reply({
@@ -10,7 +10,7 @@ async function whoareyou(interaction) {
         allowedMentions: { "users" : []}});
 }
 
-    module.exports = {
+module.exports = {
     "data": data,
     "execute": whoareyou,
     "deployAll": true,
