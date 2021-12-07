@@ -1,6 +1,6 @@
 /* Filters out non-testers when commands need testing */
-const config = require("./config.json")
-const strings = require("./strings.json")
+const config = require("./config.json");
+const strings = require("./strings.json");
 
 module.exports = {
     async execute(interaction) {
@@ -13,4 +13,4 @@ module.exports = {
             return true;
         }
     }
-}
+};
