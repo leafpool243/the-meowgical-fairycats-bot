@@ -20,15 +20,9 @@ for (const file of commandFiles) {
 
 client.once("ready", () => {
     db.run("CREATE TABLE IF NOT EXISTS users(userid INTEGER NOT NULL, test STRING)");
-<<<<<<< HEAD
     console.log(`Logged in as ${client.user.username}`);
     // client.user.setActivity("with your existence. . . .", { type: "PLAYING"});
     client.user.setActivity("with my code (testing right now). . . .", { type: "PLAYING"});
-=======
-	console.log(`Logged in as ${client.user.username}`);
-    // client.user.setActivity("with your existence. . . .", { type: "PLAYING"})
-    client.user.setActivity("with my code (testing right now). . . .", { type: "PLAYING"})
->>>>>>> f6265d4 (Changed format for commands)
 });
 
 client.on("interactionCreate", async interaction => {

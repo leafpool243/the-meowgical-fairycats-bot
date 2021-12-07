@@ -35,7 +35,6 @@ Server icon: ${interaction.guild.iconURL() || "None"}
 Server banner: ${interaction.guild.bannerURL() || "None"}
 Total channels & categories: ${await interaction.guild.channels.fetch().then(channels => { return channels.size;})}
 Total members: ${interaction.guild.memberCount} members
-<<<<<<< HEAD
 Server preview enabled: ${interaction.guild.features.includes("PREVIEW_ENABLED") ? "Yes" : "No"}
 Community enabled: ${interaction.guild.features.includes("COMMUNITY") ? "Yes" : "No"}
 Member screening enabled: ${interaction.guild.features.includes("MEMBER_VERIFICATION_GATE_ENABLED") ? "Yes" : "No"}
@@ -44,25 +43,11 @@ Welcome screen enabled: ${interaction.guild.features.includes("WELCOME_SCREEN_EN
             .setFooter("Please note that some things may not be up to date immediately.")
             .setTimestamp()
             .setAuthor(interaction.user.tag, interaction.user.avatarURL({ "StaticImageURLOptions": { "format": "png" } }));
-=======
-Server preview enabled: ${interaction.guild.features.includes("PREVIEW_ENABLED") ? `Yes` : `No`}
-Community enabled: ${interaction.guild.features.includes("COMMUNITY") ? `Yes` : `No`}
-Member screening enabled: ${interaction.guild.features.includes("MEMBER_VERIFICATION_GATE_ENABLED") ? `Yes` : `No`}
-Welcome screen enabled: ${interaction.guild.features.includes("WELCOME_SCREEN_ENABLED") ? `Yes` : `No`}
-            `)
-            .setFooter("Please note that some things may not be up to date immediately.")
-            .setTimestamp()
-            .setAuthor(interaction.user.tag, interaction.user.avatarURL({ "StaticImageURLOptions": { "format": "png" } }))
->>>>>>> f6265d4 (Changed format for commands)
 
         interaction.reply({ embeds: [embed] });
     }
 
-<<<<<<< HEAD
 }
-=======
-};
->>>>>>> f6265d4 (Changed format for commands)
 
 module.exports = {
     "data": data,
