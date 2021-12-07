@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 
 const data = new SlashCommandBuilder()
     .setName("buttons")
+<<<<<<< HEAD
     .setDescription("Send a message with buttons");
 
 async function buttons(interaction) {
@@ -50,6 +51,11 @@ async function buttons(interaction) {
     });
 
     collector.on("collect", async i => {
+=======
+    .setDescription("Send a message with buttons")
+
+async function buttons(interaction) {
+>>>>>>> 6591949 (Changed format for commands)
 
         const row = new MessageActionRow()
             .addComponents(

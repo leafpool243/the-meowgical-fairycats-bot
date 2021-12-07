@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const permissioncheck = require("../permissioncheck.js")
+const permissioncheck = require("../permissioncheck.js");
 
 const data = new SlashCommandBuilder()
     .setName("spam")
@@ -45,7 +45,7 @@ async function spam(interaction) {
     await interaction.followUp({
         content: "Spamming finished.",
     });
-};
+}
 
 module.exports = {
     "data": data,
