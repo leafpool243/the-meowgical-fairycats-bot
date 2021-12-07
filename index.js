@@ -21,7 +21,7 @@ for (const file of commandFiles) {
 client.once("ready", () => {
     db.run("CREATE TABLE IF NOT EXISTS users(userid INTEGER NOT NULL, test STRING)");
     console.log(`Logged in as ${client.user.username}`);
-    // client.user.setActivity("with your existence. . . .", { type: "PLAYING"})
+    // client.user.setActivity("with your existence. . . .", { type: "PLAYING"});
     client.user.setActivity("with my code (testing right now). . . .", { type: "PLAYING"});
 });
 
