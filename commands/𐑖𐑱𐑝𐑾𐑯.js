@@ -2,11 +2,19 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 
 const data = new SlashCommandBuilder()
     .setName("𐑖𐑱𐑝𐑾𐑯")
+<<<<<<< HEAD
     .setDescription("𐑿 𐑯𐑴 𐑞 𐑖𐑱𐑝𐑾𐑯 𐑨𐑤𐑓𐑩𐑚𐑧𐑑?");
 
 async function shavian(interaction) {
     await interaction.reply("𐑴 𐑿 𐑯𐑴 𐑞 [𐑖𐑱𐑝𐑾𐑯 𐑨𐑤𐑓𐑩𐑚𐑧𐑑](https://en.wikipedia.org/wiki/Shavian_alphabet)! 𐑒𐑵𐑤!\n> ||*Oh you know the [Shavian alphabet (https://en.wikipedia.org/wiki/Shavian_alphabet)](https://en.wikipedia.org/wiki/Shavian_alphabet)! Cool!*||");
 }
+=======
+    .setDescription("𐑿 𐑯𐑴 𐑞 𐑖𐑱𐑝𐑾𐑯 𐑨𐑤𐑓𐑩𐑚𐑧𐑑?")
+
+async function shavian(interaction) {
+        await interaction.reply("𐑴 𐑿 𐑯𐑴 𐑞 [𐑖𐑱𐑝𐑾𐑯 𐑨𐑤𐑓𐑩𐑚𐑧𐑑](https://en.wikipedia.org/wiki/Shavian_alphabet)! 𐑒𐑵𐑤!\n> ||*Oh you know the [Shavian alphabet (https://en.wikipedia.org/wiki/Shavian_alphabet)](https://en.wikipedia.org/wiki/Shavian_alphabet)! Cool!*||");
+    }
+>>>>>>> f6265d4 (Changed format for commands)
 
 module.exports = {
     "data": data,

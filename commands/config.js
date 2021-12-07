@@ -44,7 +44,11 @@ Test: ${JSON.stringify(db.prepare(`SELECT test FROM users WHERE userid=${interac
                 `);
             interaction.reply({ embeds: [embed] });
         } else if (interaction.options.getSubcommand() === "test") {
+<<<<<<< HEAD
             db.run("UPDATE users SET test = ? WHERE userid = ?", [(interaction.options.getString("value") === "unset" ? undefined : interaction.options.getString("value")), interaction.user.id]);
+=======
+            db.run("UPDATE users SET test = ? WHERE userid = ?", [(interaction.options.getString("value") === "unset" ? undefined : interaction.options.getString("value")), interaction.user.id])
+>>>>>>> f6265d4 (Changed format for commands)
             interaction.reply(`Option \`${interaction.options.getSubcommand()}\` has been set to \`${interaction.options.getString("value")}\`\n\nUnfortunately, the \`/config view\` command does not currently work, so currently, there is no way to see what value you currently have set.`);
         }
     },

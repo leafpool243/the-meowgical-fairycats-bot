@@ -6,7 +6,11 @@ const data = new SlashCommandBuilder()
 
 async function hi(interaction) {
     await interaction.reply(`Hi there, ${interaction.member.nickname || interaction.user.username}! :3`);
+<<<<<<< HEAD
 }
+=======
+};
+>>>>>>> f6265d4 (Changed format for commands)
 
 module.exports = {
     "data": data,
