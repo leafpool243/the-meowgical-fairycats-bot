@@ -36,23 +36,17 @@ module.exports = {
                 .setDescription("View current config")
             ),
     async execute(interaction) {
-        const returnView = (column) => {
-            db.get("SELECT ? FROM users WHERE userid = ?", column, interaction.user.id, (row) => {
-                return (!row ? "Not set" : row.column)
-            })
-        }
-
         if (interaction.options.getSubcommand() === "view") {
             const embed = new MessageEmbed()
                 .setColor("#9C59B6")
                 .setTitle("Current config")
                 .setDescription(`
-Test: ${returnView("test")}
+Test: ${JSON.stringify(db.prepare(`SELECT test FROM users WHERE userid=${interaction.user.id}`).get())}
                 `);
             interaction.reply({ embeds: [embed] });
         } else if (interaction.options.getSubcommand() === "test") {
             db.run("UPDATE users SET test = ? WHERE userid = ?", [(interaction.options.getString("value") === "unset" ? undefined : interaction.options.getString("value")), interaction.user.id])
-            interaction.reply(`Option \`${interaction.options.getSubcommand()}\` has been set to \`${interaction.options.getString("value")}\``);
+            interaction.reply(`Option \`${interaction.options.getSubcommand()}\` has been set to \`${interaction.options.getString("value")}\`\n\nUnfortunately, the \`/config view\` command does not currently work, so currently, there is no way to see what value you currently have set.`);
         }
     },
 };

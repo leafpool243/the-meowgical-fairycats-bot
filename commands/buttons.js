@@ -1,11 +1,11 @@
 const { MessageActionRow, MessageButton } = require('discord.js');
 const { SlashCommandBuilder } = require("@discordjs/builders");
 
-module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("buttons")
-        .setDescription("Send a message with buttons"),
-    async execute(interaction) {
+const data = new SlashCommandBuilder()
+    .setName("buttons")
+    .setDescription("Send a message with buttons")
+
+async function buttons(interaction) {
 
         const row = new MessageActionRow()
             .addComponents(
@@ -84,5 +84,12 @@ module.exports = {
                 });
             }
         });
-    },
+    }
+
+module.exports = {
+    "data": data,
+    "execute": buttons,
+    "deployAll": true,
+    "deployGuilds": [],
+    "helpInfo": "Testing buttons"
 };
