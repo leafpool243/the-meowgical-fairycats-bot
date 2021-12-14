@@ -5,6 +5,17 @@ dotenv.config();
 const sqlite = require("sqlite3").verbose();
 let db = new sqlite.Database("database.db", sqlite.OPEN_READWRITE | sqlite.OPEN_CREATE);
 
+const statuses = [
+    "Playing with your existence",
+    "Playing with my code",
+    "DIE, BUG, DIE"
+];
+
+const fancy = [
+    "♡",
+    "✧"
+];
+
 const myIntents = new Intents();
 myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES);
 
@@ -21,8 +32,18 @@ for (const file of commandFiles) {
 client.once("ready", () => {
     db.run("CREATE TABLE IF NOT EXISTS users(userid INTEGER NOT NULL, test STRING)");
     console.log(`Logged in as ${client.user.username}`);
-    // client.user.setActivity("with your existence. . . .", { type: "PLAYING"});
-    client.user.setActivity("with my code (testing right now). . . .", { type: "PLAYING"});
+
+    var chosenSymbol = fancy[Math.floor(Math.random() * fancy.length)];
+    var chosenStatus = `${chosenSymbol} ${statuses[Math.floor(Math.random() * statuses.length)]} ${chosenSymbol}`;
+    client.user.setStatus(chosenStatus);
+    console.log(chosenStatus);
+
+    setInterval(() => {
+        var chosenSymbol = fancy[Math.floor(Math.random() * fancy.length)];
+        var chosenStatus = `${chosenSymbol} ${statuses[Math.floor(Math.random() * statuses.length)]} ${chosenSymbol}`;
+        client.user.setStatus(chosenStatus);
+        console.log(chosenStatus);     
+    }, 10 * 1000);
 });
 
 client.on("interactionCreate", async interaction => {
@@ -62,5 +83,8 @@ client.on("messageCreate", async message => {
         await message.react("5️⃣");
     }
 });
+
+function changeStatus() {
+}
 
 client.login(process.env.TOKEN);
