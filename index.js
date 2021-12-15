@@ -29,6 +29,8 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command);
 }
 
+const messageFeatures = fs.readdirSync("./messages").filter(file => file.endsWith(".js"));
+
 client.once("ready", () => {
     db.run("CREATE TABLE IF NOT EXISTS users(userid INTEGER NOT NULL, test STRING)");
     console.log(`Logged in as ${client.user.username}`);
@@ -75,6 +77,8 @@ client.on("interactionCreate", async interaction => {
 });
 
 client.on("messageCreate", async message => {
+    if (message.author.bot || message.webhookId) return;
+
     if (message.channel.id == process.env.RATING_CHANNEL_ID) {
         await message.react("1️⃣");
         await message.react("2️⃣");
@@ -82,9 +86,12 @@ client.on("messageCreate", async message => {
         await message.react("4️⃣");
         await message.react("5️⃣");
     }
-});
 
-function changeStatus() {
-}
+    for (const messageFeature of messageFeatures) {
+        const feature = require(`./messages/${messageFeature}`);
+
+        feature.execute(message);
+    }
+});
 
 client.login(process.env.TOKEN);

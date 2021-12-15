@@ -20,6 +20,7 @@
     "discord.js": "^13.2.0",
     "dotenv": "^10.0.0",
     "nodemon": "^2.0.14",
+    "owoify-js": "^1.0.7",
     "sqlite3": "^5.0.2"
   },
   "engines": {
