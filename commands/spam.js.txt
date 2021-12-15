@@ -1,5 +1,9 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+<<<<<<< HEAD
 const permissioncheck = require("../permissioncheck.js");
+=======
+const permissioncheck = require("../permissioncheck.js")
+>>>>>>> 50dc0d4 (*.ts -> *.js)
 
 const data = new SlashCommandBuilder()
     .setName("spam")
