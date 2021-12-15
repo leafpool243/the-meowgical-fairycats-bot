@@ -89,7 +89,6 @@ client.on("messageCreate", async message => {
 
     for (const messageFeature of messageFeatures) {
         const feature = require(`./messages/${messageFeature}`);
-
         feature.execute(message);
     }
 });
