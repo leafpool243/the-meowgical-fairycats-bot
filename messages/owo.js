@@ -10,6 +10,7 @@ async function owo(message) {
 
         const owoified = {
             content: owoify(message.content, "uvu"),
+            files: message.attachments,
             username: message.author.nickname || message.author.username,
             avatarURL: message.author.avatarURL({ "StaticImageURLOptions": { "format": "png" } })
         };
