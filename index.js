@@ -6,8 +6,8 @@ const sqlite = require("sqlite3").verbose();
 let db = new sqlite.Database("database.db", sqlite.OPEN_READWRITE | sqlite.OPEN_CREATE);
 
 const statuses = [
-    "Playing with your existence",
-    "Playing with my code",
+    "your existence",
+    "with my code",
     "DIE, BUG, DIE"
 ];
 
@@ -34,17 +34,15 @@ const messageFeatures = fs.readdirSync("./messages").filter(file => file.endsWit
 client.once("ready", () => {
     db.run("CREATE TABLE IF NOT EXISTS users(userid INTEGER NOT NULL, test STRING)");
     console.log(`Logged in as ${client.user.username}`);
-
+    
     var chosenSymbol = fancy[Math.floor(Math.random() * fancy.length)];
     var chosenStatus = `${chosenSymbol} ${statuses[Math.floor(Math.random() * statuses.length)]} ${chosenSymbol}`;
-    client.user.setStatus(chosenStatus);
-    console.log(chosenStatus);
+    client.user.setActivity(chosenStatus, { type: "PLAYING" });
 
     setInterval(() => {
         var chosenSymbol = fancy[Math.floor(Math.random() * fancy.length)];
         var chosenStatus = `${chosenSymbol} ${statuses[Math.floor(Math.random() * statuses.length)]} ${chosenSymbol}`;
-        client.user.setStatus(chosenStatus);
-        console.log(chosenStatus);     
+        client.user.setActivity(chosenStatus, { type: "PLAYING" });
     }, 10 * 1000);
 });
 
