@@ -27,7 +27,7 @@ async function spam(interaction) {
     await interaction.reply({
         content: "Starting spam.",
         ephemeral: true
-    });
+});
 
     if (interaction.options.getInteger("num_of_times") > 20) {
         interaction.followUp({
