@@ -8,7 +8,10 @@ let db = new sqlite.Database("database.db", sqlite.OPEN_READWRITE | sqlite.OPEN_
 const statuses = [
     "your existence",
     "with my code",
-    "DIE, BUG, DIE"
+    "DIE, BUG, DIE",
+    "meeowwww!!",
+    "*hiss* a bug. yuck.",
+    "OwO! :3"
 ];
 
 const fancy = [
