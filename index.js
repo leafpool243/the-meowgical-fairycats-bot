@@ -5,6 +5,8 @@ dotenv.config();
 const sqlite = require("sqlite3").verbose();
 let db = new sqlite.Database("database.db", sqlite.OPEN_READWRITE | sqlite.OPEN_CREATE);
 
+const mongo = require("./features/mongo.js");
+
 const statuses = [
     "your existence",
     "with my code",
@@ -34,9 +36,17 @@ for (const file of commandFiles) {
 
 const messageFeatures = fs.readdirSync("./messages").filter(file => file.endsWith(".js"));
 
-client.once("ready", () => {
+client.once("ready", async () => {
     db.run("CREATE TABLE IF NOT EXISTS users(userid INTEGER NOT NULL, test STRING)");
     console.log(`Logged in as ${client.user.username}`);
+
+    await mongo().then(mongoose => {
+        try {
+            console.log("Mongo connection successful!");
+        } finally {
+            mongoose.connection.close();
+        }
+    });
     
     var chosenSymbol = fancy[Math.floor(Math.random() * fancy.length)];
     var chosenStatus = `${chosenSymbol} ${statuses[Math.floor(Math.random() * statuses.length)]} ${chosenSymbol}`;
