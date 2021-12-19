@@ -2,8 +2,6 @@ const fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
 const dotenv = require("dotenv");
 dotenv.config();
-const sqlite = require("sqlite3").verbose();
-let db = new sqlite.Database("database.db", sqlite.OPEN_READWRITE | sqlite.OPEN_CREATE);
 
 const mongo = require("./features/mongo.js");
 
@@ -37,10 +35,9 @@ for (const file of commandFiles) {
 const messageFeatures = fs.readdirSync("./messages").filter(file => file.endsWith(".js"));
 
 client.once("ready", async () => {
-    db.run("CREATE TABLE IF NOT EXISTS users(userid INTEGER NOT NULL, test STRING)");
     console.log(`Logged in as ${client.user.username}`);
 
-    await mongo().then(mongoose => {
+    await mongo(client).then(mongoose => {
         try {
             console.log("Mongo connection successful!");
         } finally {
@@ -61,19 +58,6 @@ client.once("ready", async () => {
 
 client.on("interactionCreate", async interaction => {
     if (!interaction.isCommand()) return;
-
-    db.get("SELECT * FROM users WHERE userid = ?", [interaction.user.id], (err, row) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        if (row === undefined) {
-            let insert = db.prepare("INSERT INTO users VALUES(?,?)");
-            insert.run(interaction.user.id, null);
-            insert.finalize();
-            return;
-        }
-    });
 
     const command = client.commands.get(interaction.commandName);
 

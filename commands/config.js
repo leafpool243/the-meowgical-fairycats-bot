@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageEmbed } = require("discord.js");
-const sqlite = require("sqlite3").verbose();
-let db = new sqlite.Database("database.db", sqlite.OPEN_READWRITE | sqlite.OPEN_CREATE);
+const mongo = require("../features/mongo.js");
+const userSchema = require("../mongo-schemas/user-schema.js");
 
 const data = new SlashCommandBuilder()
     .setName("config")
@@ -31,20 +31,59 @@ const data = new SlashCommandBuilder()
     .addSubcommand(subcommand =>
         subcommand
             .setName("view")
-            .setDescription("View current config"));
+            .setDescription("View current config")
+            .addStringOption(option => option
+                .setName("value")
+                .setDescription("The setting you want to view the value for")
+                .addChoices([
+                    [
+                        "Test",
+                        "test"
+                    ]
+                ])
+                .setRequired(true)));
 
 async function config(interaction) {
     if (interaction.options.getSubcommand() === "view") {
-        const embed = new MessageEmbed()
+        let result;
+        const setting = interaction.options.getString("value");
+        
+        await mongo().then(async (mongoose) => {
+            try {
+                const ID = interaction.user.id;
+                result = await userSchema.findOne({
+                    ID,
+                    setting
+                });
+            } finally {
+                mongoose.connection.close();
+            }
+        });
+
+        let embed = new MessageEmbed()
             .setColor("#9C59B6")
-            .setTitle("Current config")
+            .setTitle(`Current value of ${setting}`)
             .setDescription(`
-Test: ${JSON.stringify(db.prepare(`SELECT test FROM users WHERE userid=${interaction.user.id}`).get())}
+\`${setting}\` is currently set to \`${result[setting]}\`.
                 `);
         interaction.reply({ embeds: [embed] });
     } else if (interaction.options.getSubcommand() === "test") {
-        db.run("UPDATE users SET test = ? WHERE userid = ?", [(interaction.options.getString("value") === "unset" ? undefined : interaction.options.getString("value")), interaction.user.id]);
-        interaction.reply(`Option \`${interaction.options.getSubcommand()}\` has been set to \`${interaction.options.getString("value")}\`\n\nUnfortunately, the \`/config view\` command does not currently work, so currently, there is no way to see what value you currently have set.`);
+        await mongo().then(async (mongoose) => {
+            try {
+                await userSchema.findOneAndUpdate({
+                    _id: interaction.user.id
+                }, {
+                    _id: interaction.user.id,
+                    test: interaction.options.getString("value") === "unset" ? undefined : interaction.options.getString("value")
+                }, {
+                    upsert: true
+                }).exec();
+            
+                interaction.reply(`Option \`${interaction.options.getSubcommand()}\` has been set to \`${interaction.options.getString("value")}\``);
+            } finally {
+                mongoose.connection.close();
+            }
+        });
     }
 }
 

@@ -21,8 +21,7 @@
     "dotenv": "^10.0.0",
     "mongoose": "^6.1.2",
     "nodemon": "^2.0.14",
-    "owoify-js": "^1.0.7",
-    "sqlite3": "^5.0.2"
+    "owoify-js": "^1.0.7"
   },
   "engines": {
     "node": "^17.0.1"
